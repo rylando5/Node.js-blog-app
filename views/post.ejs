@@ -1,0 +1,102 @@
+<%- include('partials/header'); %>
+<!-- <%=  %> -->
+
+<div class = "container pt-5">
+    <div class = "container">
+
+        <div class = "row">
+            <div class = "col-12 ">
+            <img src="<%= post.image%> " class = "img-fluid" width = "100%">
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class="container">
+                <div class = "col-12 bg-dark text-white text-center">
+                    <h1 class="pt-2 pb-2"><%= post.title %></h1>
+                   
+                </div>
+                <div class = "col-12 bg-success text-white text-center ">
+                    <% if(!user){ %>
+                   
+                        <% }else{ %>
+                    <p style = "letter-spacing: 2px;" class = "pt-2 pb-2">Author: <%= user.username %></p>
+                    <%}%>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class = "row">
+            <div class = "col-12">
+                <p class="lead"><%= post.description %></p>
+            </div>
+        </div>
+
+        <div class = "row">
+            <div class = "col-12">
+                <p class="btn rounded-0 btn-warning"><%= post.tag %></p>
+                <% if(!user){ %>
+                   
+                   <% }else{ %>                   
+                <form method = "POST" action = "/blogs/<%= post._id %>?_method=DELETE">
+                    <button class="btn rounded-0 btn-danger"type = "submit">Delete Post</button>
+                </form>
+
+                    <a href = "/blogs/<%= post._id %>/edit"><button class="btn rounded-0 btn-success     "type = "submit">Edit Post</button></a>             
+                <%}%>
+            </div>
+        </div>     
+
+          
+
+    </div>
+</div>
+<!-- Comments -->
+<div class="container pt-5">
+    <div class="container">
+       <form action="/blogs/<%=post._id%>/comments" method = "POST">
+        <div class="form-group">
+            <textarea class="form-control rounded-0" placeholder="Leave a comment here" rows = "4" name = "comment"></textarea>
+          </div>
+          <!-- <button class = "btn rounded-0 btn-primary w-100">Comment</button> -->
+          <div class="form-group pt-2">
+            <button class = "btn rounded-0 btn-primary w-100" >Comments</button>
+        </div>
+       </form>
+       
+    </div>
+</div>
+
+<!-- Displaying actual comments -->
+<div class="continer pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                 <%=//post._id%> 
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Displaying Comments. -->
+<div class="container">
+    <div class="container">
+        <div class="row">
+            <% post.comments.forEach((comment) => { %>
+                
+                <div class="col-12">
+                    <strong><%=comment.author%></strong>
+                    <br>
+                    <%=comment.comment%>
+                    <br>
+                </div>    
+                    <% }) %>
+            
+        </div>
+    </div>
+</div>
+
+
+<%- include('partials/footer'); %>

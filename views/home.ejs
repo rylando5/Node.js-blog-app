@@ -1,0 +1,41 @@
+<%- include('partials/header', {}); %>
+
+<div class="container">
+    <div class="container pt-5">
+        <div class = "p-5 bg-dark text-white text-center">
+            <h3 class = "p-5 display-5">Read Blogs From Successful Developers!</h3>
+        </div>
+
+        <div class="container pt-3 ">
+            <div class="row">
+               
+                <% posts.forEach(function(post){ %>             
+                <div class=" col-sm-12 col-md-3 p-2 border">
+                    <a href = "/blogs<%= post._id %>"></a>
+                <img src = "<%= post.image %>" alt = "" class = "img-fluid">
+                </div>
+               
+                <div class=" col-sm-12 col-md-9 p-2 border">
+                    <h3>
+                        <a href = "/blogs/<%=post._id%>">   <%=post.title%> </a>                
+                    </h3>
+                    <p class = "lead" style = "text-align: justify;"><%= post.description.substring(0,300) %></p>
+                    <a href = "/blogs/<%= post._id%> ">
+                        <button class = "btn bg-dark text-white rounded-0 btn-sm">Read More..</button>
+                    </a>
+                </div>
+                <% }) %>
+            </div>        
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<%- include('partials/footer', {}); %>
